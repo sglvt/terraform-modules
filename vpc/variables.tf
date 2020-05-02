@@ -10,47 +10,25 @@ variable "stack_name" {
 
 variable "additional_tag" {
   type = string
-  description = "The name of the SRE candidate"
+  description = "Additional tag"
 }
 
 
-variable "cidr_block_vpc" {
+variable "cidr_vpc" {
   type = string
   description = "The CIDR block of the VPC"
 }
 
-variable "cidr_block_public_subnet_a" {
-  type = string
-  description = "The CIDR block of the public subnet in AZ a"
+variable "public_subnets" {
+  type    = map(string)
+  default = {
+    "a" = "10.0.0.0/24"
+  }
 }
 
-variable "cidr_block_public_subnet_b" {
-  type = string
-  description = "The CIDR block of the public subnet in AZ b"
-}
-
-variable "cidr_block_public_subnet_c" {
-  type = string
-  description = "The CIDR block of the public subnet in AZ c"
-}
-
-variable "cidr_block_private_subnet_a" {
-  type = string
-  description = "The CIDR block of the private subnet in AZ a"
-}
-
-variable "cidr_block_private_subnet_b" {
-  type = string
-  description = "The CIDR block of the private subnet in AZ b"
-}
-
-variable "cidr_block_private_subnet_c" {
-  type = string
-  description = "The CIDR block of the private subnet in AZ c"
-}
-
-variable "cluster_name" {
-  type = string
-  description = "The EKS cluster name"
-  default = ""
+variable "private_subnets" {
+  type    = map(string)
+  default = {
+    "a" = "10.100.0.0/24"
+  }
 }

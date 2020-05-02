@@ -6,8 +6,6 @@ resource "aws_subnet" "subnet" {
 
   tags = {
     Name = var.subnet_name
-    "${var.cluster_name != "" ? "kubernetes.io/cluster/${var.cluster_name}" : "non-k8s-subnet"}" = var.cluster_name != "" ? "shared" : "true"
-    # "kubernetes.io/cluster/${var.cluster_name}" = var.cluster_name != "" ? "shared" : ""
     stack_name = var.stack_name
     additional_tag = var.additional_tag
   }
