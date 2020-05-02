@@ -25,7 +25,7 @@ resource "aws_route" "public_external_access" {
 # Public Subnets
 
 module "public_subnet_a" {
-  source = "subnet"
+  source = "./subnet"
   vpc_id = aws_vpc.vpc.id
   subnet_name = "public-subnet-a"
   availability_zone = "${var.aws_region}a"
@@ -38,7 +38,7 @@ module "public_subnet_a" {
 }
 
 module "public_subnet_b" {
-  source = "subnet"
+  source = "./subnet"
   vpc_id = aws_vpc.vpc.id
   subnet_name = "public-subnet-b"
   availability_zone = "${var.aws_region}b"
@@ -51,7 +51,7 @@ module "public_subnet_b" {
 }
 
 module "public_subnet_c" {
-  source = "subnet"
+  source = "./subnet"
   vpc_id = aws_vpc.vpc.id
   subnet_name = "public-subnet-c"
   availability_zone = "${var.aws_region}c"
@@ -173,7 +173,7 @@ resource "aws_route_table" "private_rt_c" {
 # Private Subnets
 
 module "private_subnet_a" {
-  source = "subnet"
+  source = "./subnet"
   vpc_id = aws_vpc.vpc.id
   subnet_name = "private-subnet-a"
   availability_zone = "${var.aws_region}a"
@@ -186,7 +186,7 @@ module "private_subnet_a" {
 }
 
 module "private_subnet_b" {
-  source = "subnet"
+  source = "./subnet"
   vpc_id = aws_vpc.vpc.id
   subnet_name = "private-subnet-b"
   availability_zone = "${var.aws_region}b"
@@ -199,7 +199,7 @@ module "private_subnet_b" {
 }
 
 module "private_subnet_c" {
-  source = "subnet"
+  source = "./subnet"
   vpc_id = aws_vpc.vpc.id
   subnet_name = "private-subnet-c"
   availability_zone = "${var.aws_region}c"
