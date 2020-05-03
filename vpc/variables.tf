@@ -8,11 +8,6 @@ variable "stack_name" {
   description = "Stack name"
 }
 
-variable "additional_tag" {
-  type = string
-  description = "Additional tag"
-}
-
 
 variable "cidr_vpc" {
   type = string
@@ -21,14 +16,35 @@ variable "cidr_vpc" {
 
 variable "public_subnets" {
   type    = map(string)
-  default = {
-    "a" = "10.0.0.0/24"
-  }
+  description = "Map of availability zones and CIDR blocks of public subnets"
 }
 
 variable "private_subnets" {
   type    = map(string)
-  default = {
-    "a" = "10.100.0.0/24"
-  }
+  description = "Map of availability zones and CIDR blocks of private subnets"
+}
+
+variable "create_nat_gateways" {
+  type = bool
+  description = "Flag which determines whether NAT gateways will be created in public subnets"
+}
+
+variable "nat_gateway_az" {
+  type    = list(string)
+  description = "List of availability zones where NAT gateways should be created"
+}
+
+variable "additional_tags" {
+  type    = map(string)
+  description = "Additional tags to be added"
+}
+
+variable "igw_routes" {
+  type    = list(string)
+  description = "Public Subnets - Destination CIDRs for routes passing through the NAT gateways"
+}
+
+variable "nat_routes" {
+  type    = list(string)
+  description = "Private Subnets - Destination CIDRs for routes passing through the NAT gateways"
 }
