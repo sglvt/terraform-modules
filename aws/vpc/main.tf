@@ -32,7 +32,7 @@ resource "aws_route_table" "public_route" {
   vpc_id = aws_vpc.vpc.id
 
   dynamic "route" {
-    for_each = var.nat_routes
+    for_each = var.igw_routes_for_public_subnets
 
     content {
       cidr_block = route.value
@@ -89,7 +89,7 @@ resource "aws_route_table" "private_routes" {
   vpc_id = aws_vpc.vpc.id
 
   dynamic "route" {
-    for_each = var.nat_routes
+    for_each = var.nat_routes_for_private_subnets
 
     content {
       cidr_block = route.value

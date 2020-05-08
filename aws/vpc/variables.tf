@@ -39,12 +39,12 @@ variable "additional_tags" {
   description = "Additional tags to be added"
 }
 
-variable "igw_routes" {
+variable "igw_routes_for_public_subnets" {
   type    = list(string)
-  description = "Public Subnets - Destination CIDRs for routes passing through the NAT gateways"
+  description = "Public Subnets - Destination CIDRs for routes passing through the Internet gateway"
 }
 
-variable "nat_routes" {
+variable "nat_routes_for_private_subnets" {
   type    = list(string)
   description = "Private Subnets - Destination CIDRs for routes passing through the NAT gateways"
 }
