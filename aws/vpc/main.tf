@@ -52,7 +52,7 @@ resource "aws_route_table_association" "public_route_associations" {
   route_table_id = aws_route_table.public_route.id
 }
 
-resource "aws_eip" "eip" {
+resource "aws_eip" "nat_gateway_eips" {
   for_each = toset(var.nat_gateway_az)
 
   tags = merge({
@@ -62,7 +62,7 @@ resource "aws_eip" "eip" {
 
 resource "aws_nat_gateway" "nat_gateways" {
   for_each = toset(var.nat_gateway_az)
-  allocation_id = aws_eip.eip[each.key].id
+  allocation_id = aws_eip.nat_gateway_eips[each.key].id
   subnet_id = aws_subnet.public_subnets[each.key].id
 
   tags = merge({
