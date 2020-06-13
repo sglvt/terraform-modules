@@ -38,9 +38,9 @@ variable "stack_name" {
   description = "Stack Name"
 }
 
-variable "name" {
+variable "name_prefix" {
   type = string
-  description = "Name of the security group"
+  description = "Name prefix for the security group"
 }
 
 variable "description" {
