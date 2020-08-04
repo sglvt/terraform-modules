@@ -3,34 +3,34 @@ variable "vpc_id" {
   description = "The id of the VPC where the security group needs to be created"
 }
 
-variable "tcp_ingress" {
-  type    = map(string)
-  description = "Map of ports and CIDR blocks used for TCP inbound rules"
-}
-
-variable "udp_ingress" {
-  type    = map(string)
-  description = "Map of ports and CIDR blocks used for UDP inbound rules"
-}
-
-variable "any_ingress" {
+variable "ingress_from_self_list" {
   type    = list(string)
-  description = "List of CIDR blocks for All Traffic inbound rules"
+  description = "List of concatenated ports, protocols from the same SG used for inbound rules"
+  default = []
 }
 
-variable "tcp_egress" {
-  type    = map(string)
-  description = "Map of ports and CIDR blocks used for TCP outbound rules"
-}
-
-variable "udp_egress" {
-  type    = map(string)
-  description = "Map of ports and CIDR blocks used for UDP outbound rules"
-}
-
-variable "any_egress" {
+variable "ingress_source_sg_list" {
   type    = list(string)
-  description = "List of CIDR blocks for All Traffic outbound rules"
+  description = "List of concatenated ports, protocols, source SGs used for inbound rules"
+  default = []
+}
+
+variable "ingress_cidr_list" {
+  type    = list(string)
+  description = "List of concatenated ports, protocols, CIDR blocks used for inbound rules"
+  default = []
+}
+
+variable "egress_source_sg_list" {
+  type    = list(string)
+  description = "List of concatenated ports, protocols, source sgs used for outbound rules"
+  default = []
+}
+
+variable "egress_cidr_list" {
+  type    = list(string)
+  description = "List of concatenated ports, protocols, CIDR blocks used for outbound rules"
+  default = [ "0,0,-1,0.0.0.0/0" ]
 }
 
 variable "stack_name" {

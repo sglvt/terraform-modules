@@ -3,88 +3,73 @@ resource "aws_security_group" "security_group" {
   description = var.description
   vpc_id = var.vpc_id
 
-//  Ingress - TCP
+//  Ingress - Source SG
   dynamic "ingress" {
-    for_each = var.tcp_ingress
+    for_each = var.ingress_source_sg_list
 
     content {
-      from_port = ingress.key
-      to_port = ingress.key
-      protocol = "TCP"
-      cidr_blocks = split(",", ingress.value)
+      from_port = element(split(",", ingress.value), 0)
+      to_port = element(split(",", ingress.value), 1)
+      protocol = element(split(",", ingress.value), 2)
+      security_groups = [ element(split(",", ingress.value), 3) ]
     }
 
   }
 
-
-//  Ingress - UDP
+//  Ingress - CIDR
   dynamic "ingress" {
-    for_each = var.udp_ingress
+    for_each = var.ingress_cidr_list
 
     content {
-      from_port = ingress.key
-      to_port = ingress.key
-      protocol = "UDP"
-      cidr_blocks = split(",", ingress.value)
+      from_port = element(split(",", ingress.value), 0)
+      to_port = element(split(",", ingress.value), 1)
+      protocol = element(split(",", ingress.value), 2)
+      cidr_blocks = [ element(split(",", ingress.value), 3) ]
     }
 
   }
 
 
-//  Ingress - Any Protocol
-  dynamic "ingress" {
-    for_each = var.any_ingress
-
-    content {
-      from_port = "0"
-      to_port = "0"
-      protocol = "-1"
-      cidr_blocks = split(",", ingress.value)
-    }
-
-  }
-
-//  Egress - TCP
+//  Egress - Source SG
   dynamic "egress" {
-    for_each = var.tcp_egress
+    for_each = var.egress_source_sg_list
 
     content {
-      from_port = egress.key
-      to_port = egress.key
-      protocol = "TCP"
-      cidr_blocks = split(",", egress.value)
+      from_port = element(split(",", egress.value), 0)
+      to_port = element(split(",", egress.value), 1)
+      protocol = element(split(",", egress.value), 2)
+      security_groups = [ element(split(",", egress.value), 3) ]
     }
 
   }
 
-//  Egress - UDP
+//  Egress - CIDR
   dynamic "egress" {
-    for_each = var.udp_egress
+    for_each = var.egress_cidr_list
 
     content {
-      from_port = egress.key
-      to_port = egress.key
-      protocol = "UDP"
-      cidr_blocks = split(",", egress.value)
+      from_port = element(split(",", egress.value), 0)
+      to_port = element(split(",", egress.value), 1)
+      protocol = element(split(",", egress.value), 2)
+      cidr_blocks = [ element(split(",", egress.value), 3) ]
     }
 
   }
 
-//  Egress - Any Protocol
-  dynamic "egress" {
-    for_each = var.any_egress
+  tags = merge({
+    Name = "${var.name_prefix}"
+  }, var.additional_tags)
+}
 
-    content {
-      from_port = "0"
-      to_port = "0"
-      protocol = "-1"
-      cidr_blocks = split(",", egress.value)
-    }
+//  Ingress - Self
+resource "aws_security_group_rule" "ingress_self" {
+  for_each = toset(var.ingress_from_self_list)
 
-  }
-
-  tags = {
-    Name = "external-ssh"
-    stack_name = var.stack_name
-  }
+  from_port = element(split(",", each.value), 0)
+  to_port = element(split(",", each.value), 1)
+  protocol = element(split(",", each.value), 2)
+  description = element(split(",", each.value), 3)
+  security_group_id = aws_security_group.security_group.id
+  source_security_group_id = aws_security_group.security_group.id
+  type = "ingress"
 }
