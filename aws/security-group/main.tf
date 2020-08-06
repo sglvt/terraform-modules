@@ -88,6 +88,20 @@ resource "aws_security_group" "security_group" {
 
   }
 
+//  Ingress - Self
+  dynamic "egress" {
+    for_each = var.egress_from_self_list
+
+    content {
+      from_port = element(split(",", egress.value), 0)
+      to_port = element(split(",", egress.value), 1)
+      protocol = element(split(",", egress.value), 2)
+      description = element(split(",", egress.value), 3)
+      self = true
+    }
+
+  }
+
 //  Egress - CIDR IPv6
   dynamic "egress" {
     for_each = var.egress_ipv6_cidr_list
