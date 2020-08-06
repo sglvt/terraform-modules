@@ -33,7 +33,7 @@ resource "aws_security_group" "security_group" {
 
 //  Ingress - CIDR IPv6
   dynamic "ingress" {
-    for_each = var.ingress_ipv6_cidr_blocks
+    for_each = var.ingress_ipv6_cidr_list
 
     content {
       from_port = element(split(",", ingress.value), 0)
@@ -90,7 +90,7 @@ resource "aws_security_group" "security_group" {
 
 //  Egress - CIDR IPv6
   dynamic "egress" {
-    for_each = var.egress_ipv6_cidr_blocks
+    for_each = var.egress_ipv6_cidr_list
 
     content {
       from_port = element(split(",", egress.value), 0)
