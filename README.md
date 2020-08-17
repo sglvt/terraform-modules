@@ -14,7 +14,7 @@ Creates a security group.
 
 [README](https://github.com/serbangilvitu/terraform-modules/tree/master/aws/security-group/README.md)
 
-[Example](https://github.com/serbangilvitu/terraform-modules/tree/master/aws/security-group)
+[Example](https://github.com/serbangilvitu/terraform-examples/tree/master/aws/vpc-sg)
 
 ## eks-node-group
 
