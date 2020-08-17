@@ -5,11 +5,14 @@
 Create a VPC with an internet gateway, public and/or private subnets, route tables, nat gateways, elastic IPs.
 
 [README](https://github.com/serbangilvitu/terraform-modules/tree/master/aws/vpc/README.md)
+
 [Example](https://github.com/serbangilvitu/terraform-examples/tree/master/aws/vpc)
 
 ## security-group
 
 Creates a security group.
+
+[README](https://github.com/serbangilvitu/terraform-modules/tree/master/aws/security-group/README.md)
 
 [Example](https://github.com/serbangilvitu/terraform-modules/tree/master/aws/security-group)
 
@@ -20,4 +23,6 @@ Creates the following resources for a node group which can be part of an AWS EKS
 * Launch template
 * Autoscaling group
 
-[Example](https://github.com/serbangilvitu/terraform-examples/tree/master/aws/eks-public)
+[README](https://github.com/serbangilvitu/terraform-modules/tree/master/aws/eks-node-group/README.md)
+
+[Example](https://github.com/serbangilvitu/terraform-examples/tree/master/aws/eks)
