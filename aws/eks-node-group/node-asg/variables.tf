@@ -3,11 +3,6 @@ variable "cluster_name" {
   description = "EKS cluster name"
 }
 
-variable "on_demand_desired_size" {
-  type = string
-  description = "EKS node group - on-demand - desired size"
-}
-
 variable "max_size" {
   type = string
   description = "EKS node group - on-demand - max size"
@@ -28,11 +23,6 @@ variable "launch_template" {
   description = "EKS node group - launch template"
 }
 
-variable "spot_price" {
-  type = string
-  description = "EC2 spot price"
-}
-
 variable "stack_name" {
   type = string
   description = "Stack Name"
@@ -41,5 +31,32 @@ variable "stack_name" {
 
 variable "additional_tags" {
   type    = map(string)
-  description = "Additional tags to be added"
+  description = "Map of additional tags to be added"
+}
+
+# Mixed Instances Policy
+
+variable "on_demand_base_capacity" {
+  type = string
+  description = "Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances"
+}
+
+variable "on_demand_percentage_above_base_capacity" {
+  type = string
+  description = "Percentage split between on-demand and Spot instances above the base on-demand capacity"
+}
+
+variable "spot_allocation_strategy" {
+  type = string
+  description = "Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances"
+}
+
+variable "spot_instance_pools" {
+  type = string
+  description = "Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances"
+}
+
+variable "spot_max_price" {
+  type = string
+  description = "EC2 spot price"
 }

@@ -22,13 +22,13 @@ resource "aws_launch_template" "eks_worker" {
   image_id = data.aws_ami.eks_worker.id
   instance_type = var.instance_type
   user_data = base64encode(templatefile("${path.module}/eks_worker.sh.tpl", {
-    pre_userdata = "",
+    pre_userdata = var.pre_userdata,
     cluster_auth_base64 = var.cluster_auth_base64,
     endpoint = var.endpoint,
-    bootstrap_extra_args = "",
-    kubelet_extra_args = "",
+    bootstrap_extra_args = var.bootstrap_extra_args,
+    kubelet_extra_args = var.kubelet_extra_args,
     cluster_name = var.cluster_name,
-    additional_userdata = ""
+    additional_userdata = var.additional_userdata
   }))
 
   network_interfaces {

@@ -2,8 +2,6 @@ resource "aws_autoscaling_group" "asg" {
   vpc_zone_identifier = var.subnet_ids
   min_size = var.min_size
   max_size = var.max_size
-  desired_capacity = var.on_demand_desired_size
-
 
   mixed_instances_policy {
     launch_template {
@@ -15,12 +13,12 @@ resource "aws_autoscaling_group" "asg" {
     }
 
     instances_distribution {
-      on_demand_base_capacity = var.on_demand_desired_size
-      on_demand_percentage_above_base_capacity = 50
+      on_demand_base_capacity = var.on_demand_base_capacity
+      on_demand_percentage_above_base_capacity = var.on_demand_percentage_above_base_capacity
       on_demand_allocation_strategy = "prioritized"
-      spot_allocation_strategy = "lowest-price"
-      spot_instance_pools = "2"
-      spot_max_price = var.spot_price
+      spot_allocation_strategy = var.spot_allocation_strategy
+      spot_instance_pools = var.spot_instance_pools
+      spot_max_price = var.spot_max_price
     }
   }
 

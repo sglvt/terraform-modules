@@ -24,7 +24,7 @@ variable "key_name" {
   description = "The key_name attribute of the launch configuration"
 }
 
-variable "spot_price" {
+variable "spot_max_price" {
   type = string
   description = "EC2 spot price"
 }
@@ -62,5 +62,25 @@ variable "stack_name" {
 
 variable "additional_tags" {
   type    = map(string)
-  description = "Additional tags to be added"
+  description = "Map of additional tags to be added"
+}
+
+variable "pre_userdata" {
+  type = string
+  description = "User data before bootstrap.sh"
+}
+
+variable "bootstrap_extra_args" {
+  type = string
+  description = "Extra arguments for bootstrap.sh"
+}
+
+variable "kubelet_extra_args" {
+  type = string
+  description = "Arguments to be used for --kubelet-extra-args"
+}
+
+variable "additional_userdata" {
+  type = string
+  description = "User data after bootstrap.sh"
 }

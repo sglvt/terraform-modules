@@ -36,7 +36,7 @@ variable "nat_gateway_az" {
 
 variable "additional_tags" {
   type    = map(string)
-  description = "Additional tags to be added"
+  description = "Map of additional tags to be added"
 }
 
 variable "igw_routes_for_public_subnets" {

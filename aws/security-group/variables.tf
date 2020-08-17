@@ -3,6 +3,27 @@ variable "vpc_id" {
   description = "The id of the VPC where the security group needs to be created"
 }
 
+variable "stack_name" {
+  type = string
+  description = "Stack Name"
+}
+
+variable "name_prefix" {
+  type = string
+  description = "Name prefix for the security group"
+}
+
+variable "description" {
+  type = string
+  description = "Description of the security group"
+}
+
+
+variable "additional_tags" {
+  type    = map(string)
+  description = "Map of additional tags to be added"
+}
+
 # Ingress
 
 variable "ingress_cidr_list" {
@@ -65,25 +86,4 @@ variable "egress_source_sg_list" {
   type    = list(string)
   description = "List of concatenated ports, protocols, source sgs used for outbound rules"
   default = []
-}
-
-variable "stack_name" {
-  type = string
-  description = "Stack Name"
-}
-
-variable "name_prefix" {
-  type = string
-  description = "Name prefix for the security group"
-}
-
-variable "description" {
-  type = string
-  description = "Description of the security group"
-}
-
-
-variable "additional_tags" {
-  type    = map(string)
-  description = "Additional tags to be added"
 }
