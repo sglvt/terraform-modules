@@ -145,6 +145,6 @@ resource "aws_security_group" "security_group" {
   }
 
   tags = merge({
-    Name = "${var.name_prefix}"
+    Name = "${var.stack_name}-${var.name_prefix}"
   }, var.additional_tags)
 }
