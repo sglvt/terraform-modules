@@ -13,7 +13,7 @@ data "aws_ami" "eks_worker" {
       "hvm"]
   }
 
-  owners = [
+  owners = [ "558608220178",
     "602401143452"]
 }
 
